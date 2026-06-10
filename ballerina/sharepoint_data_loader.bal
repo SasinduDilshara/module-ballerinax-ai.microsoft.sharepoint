@@ -17,7 +17,7 @@
 import ballerina/ai;
 import ballerina/http;
 import ballerina/log;
-import ballerina/time;
+
 
 # A data loader that retrieves documents from SharePoint document libraries as text.
 @display {
