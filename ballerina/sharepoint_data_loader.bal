@@ -17,11 +17,12 @@
 import ballerina/ai;
 import ballerina/http;
 import ballerina/log;
+import ballerina/time;
 
 
 # A data loader that retrieves documents from SharePoint document libraries as text.
 @display {
-    label: "Microsoft SharePoint Text Data Loader"
+    label: " SharePoint Text Data Loader"
 }
 public isolated class TextDataLoader {
     *ai:DataLoader;
