@@ -83,6 +83,19 @@ isolated function encodeUri(string value) returns string {
     return encoded is string ? encoded : value;
 }
 
+// Percent-encodes a Graph drive path while preserving the `/` separators, so the
+// `root:/path/to/item` hierarchy addressing stays intact. Each segment is encoded
+// individually; encoding the whole path would turn `/` into `%2F`, which Graph
+// interprets as a literal character and not a path delimiter.
+isolated function encodeDrivePath(string path) returns string {
+    string[] segments = re `/`.split(path);
+    string[] encoded = [];
+    foreach string segment in segments {
+        encoded.push(encodeUri(segment));
+    }
+    return string:'join("/", ...encoded);
+}
+
 // How a file's content is turned into text, derived from its MIME type / extension.
 enum DocumentKind {
     // Inherently textual; decoded directly from its bytes.

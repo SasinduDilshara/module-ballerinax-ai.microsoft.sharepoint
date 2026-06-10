@@ -55,7 +55,7 @@ Execute the commands below to build from the source.
    ./gradlew clean test -Pgroups=<test_group_names>
    ```
 
-4. To build the without the tests:
+4. To build without the tests:
 
    ```bash
    ./gradlew clean build -x test

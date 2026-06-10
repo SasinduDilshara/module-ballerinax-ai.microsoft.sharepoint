@@ -1,14 +1,13 @@
 [package]
 distribution = "2201.12.0"
-org = "orgsd"
+org = "ballerinax"
 name = "ai.microsoft.sharepoint"
 version = "1.0.0"
 license = ["Apache-2.0"]
 icon = "icon.png"
 authors = ["Ballerina"]
-keywords = ["Vendor/Microsoft", "Area/AI & Machine Learning", "Type/Data Loader"]
+keywords = ["Vendor/Microsoft", "Area/AI & Machine Learning", "Type/Data Loader", "sharepoint"]
 repository = "https://github.com/ballerina-platform/module-ballerinax-ai.microsoft.sharepoint"
-visibility="private"
 
 [platform.java21]
 graalvmCompatible = true

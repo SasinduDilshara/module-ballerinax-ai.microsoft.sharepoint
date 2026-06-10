@@ -69,7 +69,7 @@ public isolated class TextDataLoader {
                 // A `"*"` target applies the paths to every library, where a path
                 // need not exist in all of them, so a missing path is tolerated.
                 // A named library is a single drive, so there it stays a real error.
-                boolean tolerateMissing = driveIds.length() > 1;
+                boolean tolerateMissing = target.name == "*";
                 foreach string driveId in driveIds {
                     foreach string rawPath in target.paths {
                         ai:Document[] loaded = check self.loadPath(driveId,
@@ -93,7 +93,7 @@ public isolated class TextDataLoader {
     private isolated function resolveDrives(string siteId, string driveName)
             returns string[]|ai:Error {
         do {
-            json firstPage = check self.graphClient->get(string `/v1.0/sites/${siteId}/drives`);
+            json firstPage = check self.graphClient->/v1\.0/sites/[siteId]/drives;
             json[] drives = [...valuesOf(firstPage), ...check self.remainingValues(nextLinkOf(firstPage))];
             if drives.length() == 0 {
                 return error ai:Error(string `No document libraries were found for site '${siteId}'`);
@@ -235,7 +235,7 @@ public isolated class TextDataLoader {
                 return check self.loadFolder(driveId, "", recursive, includeExtensions);
             }
             DriveItem|error item =
-                self.graphClient->get(string `/v1.0/drives/${encodeUri(driveId)}/root:${encodeUri(path)}`);
+                self.graphClient->get(string `/v1.0/drives/${encodeUri(driveId)}/root:${encodeDrivePath(path)}`);
             if item is error {
                 if tolerateMissing && isNotFoundError(item) {
                     return [];
@@ -274,7 +274,7 @@ public isolated class TextDataLoader {
                         string `/v1.0/drives/${encodeUri(driveId)}/root/children`);
             } else {
                 listing = check self.graphClient->get(
-                        string `/v1.0/drives/${encodeUri(driveId)}/root:${encodeUri(folderPath)}:/children`);
+                        string `/v1.0/drives/${encodeUri(driveId)}/root:${encodeDrivePath(folderPath)}:/children`);
             }
             // The first page is typed; later `@odata.nextLink` pages arrive as
             // JSON and are bound back into `DriveItem`s.
