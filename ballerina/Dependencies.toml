@@ -412,7 +412,7 @@ dependencies = [
 ]
 
 [[package]]
-org = "orgsd"
+org = "ballerinax"
 name = "ai.microsoft.sharepoint"
 version = "1.0.0"
 dependencies = [
@@ -426,6 +426,6 @@ dependencies = [
 	{org = "ballerina", name = "url"}
 ]
 modules = [
-	{org = "orgsd", packageName = "ai.microsoft.sharepoint", moduleName = "ai.microsoft.sharepoint"}
+	{org = "ballerinax", packageName = "ai.microsoft.sharepoint", moduleName = "ai.microsoft.sharepoint"}
 ]
 
